@@ -11,16 +11,28 @@
 
 ---
 
-## 🚀 Key Features
+## 🚀 Key Features and Gate Capabilities
 
-| Category | Capabilities |
-| :--- | :--- |
-| **22 Phasor Gates** | **Standard:** Shift, Mix, DFT, Permute, Reverse, Accumulate, GridPropagate <br> **Non-linear:** Threshold, Saturate, Normalize, PullBack, LogCompress, CrossCorrelate, Convolve <br> **Neuromorphic:** Synaptic, Kuramoto, Hebbian, Ising, AsymmetricCouple <br> **Encoding:** EncodePhase, EncodeAmplitude |
-| **PhasorCircuit API** | Fluent, Qiskit-style circuit construction with full introspection and state visualization. |
-| **AnalyticEngine** | High-performance PyTorch simulator with full autograd support for variational optimization. |
-| **Experimental ML** | **VPC** (Classifier), **PhasorTransformer** (Sequence Prediction), and **PhasorGAN** (Generative Modeling). |
-| **Neuromorphic** | LIP integration layers and associative oscillator memory modules. |
-| **Visualization** | Native support for text-based and Matplotlib-based circuit diagrams. |
+A `PhasorCircuit` evaluates logic mathematically using discrete chronological combinations of unitary bounded complex operators. PhasorFlow directly exposes 22 highly-optimized native Gates covering everything from deep learning parameters to neuromorphic simulation out of the box.
+
+### General & Topologies
+- **Shift (`S`)**: Applies a localized scalar rotation $\phi$ to a single feature-thread. Serves correspondingly as parameterized feed-forward layers in Variational circuits.
+- **Mix**: Implements a symmetrical topological entanglement boundary coupling adjacent dimension threads into unified representations.
+- **DFT**: Applies the unparameterized global Discrete Fourier Transform natively to the full tensor space in $O(T\log T)$, mixing multi-dimensional sequences frictionlessly.
+- **CrossCorrelate / Convolve**: Executes sliding spatial convolutions directly in the complex phase domain for pattern matching.
+
+### Discontinuous Boundaries
+Unlike fully continuous quantum operators, classical simulation natively supports evaluating discontinuous sub-states necessary for holographic memory binding.
+- **Threshold**: Mathematically zeroes specific state propagation if numerical coherence falls below user-designated boundaries.
+- **Saturate**: Immediately forces thread phases geometrically into fixed angular sub-bins (e.g. $[0, \pi]$).
+- **Ising**: Drives bi-modal $(0, \pi)$ symmetry for graph partitioning and optimization.
+
+### Neuromorphic Sub-Rhythms
+PhasorFlow rigorously reproduces continuous differential equation physics directly via phase representations.
+- **Kuramoto**: Global uniform phase-coupling imitating biological macroscopic coherence synchronization.
+- **LIP-Layer**: *Leaky-Integrate-and-Phase* dynamics mirroring binary neural spiking arrays into continuous rhythmic flows.
+- **Oscillatory Associative Memory (Hebbian)**: Structural Hopfield algorithms utilizing uncoupled Hebbian sum rules to generate robust fault-tolerant geometric attractors natively.
+- **Synaptic Coupling**: Directed continuous phase momentum transfer between distinct computational reservoirs.
 
 ---
 
@@ -28,7 +40,7 @@
 
 ```bash
 # Clone the repository
-git clone [https://github.com/mindverse-computing/phasorflow.git](https://github.com/mindverse-computing/phasorflow.git)
+git clone https://github.com/mindverse-computing/phasorflow.git
 cd phasorflow
 
 # Create virtual environment
@@ -36,8 +48,7 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
-
+pip install -e .
 ```
 
 ---
@@ -46,67 +57,48 @@ pip install -r requirements.txt
 
 ```python
 import math
-from PhasorFlow import PhasorCircuit
-from PhasorFlow.engine.analytic import AnalyticEngine
+import phasorflow as pf
 
 # Create a circuit with 2 oscillator threads
-pc = PhasorCircuit(2)
-pc.shift(0, math.pi)   # Shift thread 0 by π
-pc.mix(0, 1)            # Interference gate (analog of Hadamard)
+circuit = pf.PhasorCircuit(2)
+circuit.shift(0, math.pi)   # Parameter Rotation on thread 0 by π
+circuit.mix(0, 1)            # Topological Interference gate 
 
-# Run via the PyTorch backend
-engine = AnalyticEngine()
-result = engine.run(pc)
+# Run via the PyTorch analytic backend
+engine = pf.Simulator.get_backend('analytic_simulator')
+result = engine.run(circuit)
 
-print(f"State: {result['state_vector']}")
-print(f"Phases: {result['phases']}")
-
+print(f"State Vector: {result['state_vector']}")
+print(f"Output Angles (rad): {result['phases']}")
 ```
 
 ---
 
-## 🧠 Model Zoo
+## 🧠 Model Zoo Capabilities
 
 ### VPC — Variational Phasor Circuit Classifier
+The VPC architecture statically maps feature vectors into physical initial conditions and dynamically optimizes sequential `Shift` operators globally via gradient methods against categorical targets—evaluating complex separating structures with just dozens of weights instead of thousands.
 
-The VPC architecture maps input features to phases and optimizes circuit parameters for classification tasks.
-
-```python
-from PhasorFlow.models import VPC
-
-model = VPC(num_features=12, num_layers=2)
-model.fit(X_train, y_train, epochs=50, lr=0.1)
-accuracy = model.score(X_test, y_test)
-
-```
-
-### PhasorTransformer — FNet-Style Sequence Prediction
-
-Utilizes Discrete Fourier Transform (DFT) gates to perform mixing, offering a phasor-based alternative to traditional attention.
-
-```python
-from PhasorFlow.models import PhasorTransformer
-
-model = PhasorTransformer(seq_length=10, num_blocks=2)
-model.fit(X_train, y_train, epochs=30, lr=0.05)
-future = model.predict_autoregressive(context, horizon=20)
-
-```
+### PhasorTransformer — Continuous Sequence Architectures
+Extends Google's FNet theory by abandoning multi-head attention $Q K^T V$ weight projection entirely in favor of unparameterized sequence token mixing (`.dft()`) on the unit circle. Emulates classical autoregressive predictive transformers physically.
 
 ---
 
-## 📓 Research Notebooks
+## 📓 Research Notebooks & Validation
 
-| Index | Notebook | Focus Area |
+PhasorFlow ships with rigorous mathematically validated `Jupyter` notebooks proving every theoretical capability spanning algorithm equivalents identically matching Qiskit to complete Hopfield Neural Denoising tasks.
+
+| Section | Notebook | Focus Area |
 | --- | --- | --- |
-| 1 | `1-Circuits.ipynb` | Core operations & gate catalog |
-| 2.2 | `2.2-Shor's-Algorithm.ipynb` | Period finding via phasor circuits |
-| 2.4 | `2.4-Associative-Memory.ipynb` | Oscillator-based associative memory |
-| 3.1 | `3.1-VPC-Single.ipynb` | VPC first principles |
-| 4.4 | `4.4-LPM.ipynb` | Large Phasor Model (Autoregressive) |
-| 5.1 | `5.1-Phasor-GAN.ipynb` | Generative Adversarial Networks |
+| 1 | `1-Circuits.ipynb` | Base architecture & visualization validation |
+| 2.2 | `2.2-Shor's-Algorithm.ipynb` | Deterministic classical extraction of Shor's quantum period physics |
+| 2.3 | `2.3-Neural-Binding.ipynb` | Validation of LIP Layer and Kuramoto binding physics |
+| 2.4 | `2.4-Associative-Memory.ipynb` | Convergence properties of Holographic Multi-Pattern Phase Storage |
+| 2.5 | `2.5-Finance-Volatility-Phasor.ipynb` | Unsupervised OHLCV Phase Coherence charting anomaly detection |
+| 3.1 | `3.1-VPC-Single.ipynb` | Gradient evaluation limits of minimal continuous classification models |
+| 4.1 | `4.1-Phasor-Transformer.ipynb` | Regressive mapping of $T$-temporal continuous sinusoidal windows |
 
-*For a full list of all 20+ documentation notebooks, see the [notebooks/](https://www.google.com/search?q=notebooks/) directory.*
+*Pre-generated python execution configurations exist for all capabilities in `/phasorflow/examples/...`*
 
 ---
 

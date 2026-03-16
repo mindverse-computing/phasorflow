@@ -1,0 +1,34 @@
+site_name: PhasorFlow
+site_description: An Open-Source Framework for Continuous Phase-Based Unit Circle Computing
+nav:
+  - Welcome: index.md
+  - Getting Started: getting_started.md
+  - Gates & Matrices: gates.md
+  - Traditional DSA: traditional_dsa.md
+  - Neuromorphic Operations: neuromorphic.md
+  - Variational Phasor Circuits (VPC): machine_learning.md
+  - Phasor Transformers: transformer.md
+ 
+
+theme:
+  name: readthedocs
+  highlightjs: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+plugins:
+  - search
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js
