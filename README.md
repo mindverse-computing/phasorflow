@@ -1,30 +1,34 @@
+
 # PhasorFlow 🌀
 
-**PhasorFlow** is a high-performance Python library for **Unit Circle (U1) Phasor-based Computing**. Built on PyTorch, it provides a complete framework for building, training, and deploying machine learning models that operate entirely on the unit circle through continuous phase interference.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19044565.svg)](https://doi.org/10.5281/zenodo.19044565)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![Framework: PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c.svg)](https://pytorch.org/)
 
-> PhasorFlow is released for academic and research purposes under the **CC BY-NC 4.0** license.
-> Commercial use is strictly prohibited. See the [LICENSE](LICENSE) file for details regarding patent and trademark reservations.
+**PhasorFlow** is a high-performance Python library for **Unit Circle (Phasor) based Computing**. Built on PyTorch, it provides a complete framework for building, training, and deploying machine learning models that operate entirely on the unit circle through continuous phase interference.
+
+> **Academic & Research Notice:** PhasorFlow is released under the **CC BY-NC 4.0** license. Commercial use is strictly prohibited. See the [LICENSE](LICENSE) file for details regarding patent and trademark reservations.
 
 ---
 
-## Key Features
+## 🚀 Key Features
 
 | Category | Capabilities |
-|---|---|
-| **22 Phasor Gates** | Standard (Shift, Mix, DFT, Permute, Reverse, Accumulate, GridPropagate), Non-linear (Threshold, Saturate, Normalize, PullBack, LogCompress, CrossCorrelate, Convolve), Neuromorphic (Synaptic, Kuramoto, Hebbian, Ising, AsymmetricCouple), Encoding (EncodePhase, EncodeAmplitude) |
-| **PhasorCircuit API** | Fluent, Qiskit-style circuit construction with full introspection |
-| **AnalyticEngine** | Pure-PyTorch simulator with autograd support for variational optimization |
-| **ML Models** | VPC (classifier), PhasorTransformer (sequence prediction), PhasorGAN (timeseries generation) |
-| **Neuromorphic** | LIP integration layers, associative oscillator memory |
-| **Visualization** | Text-based and Matplotlib circuit drawing |
+| :--- | :--- |
+| **22 Phasor Gates** | **Standard:** Shift, Mix, DFT, Permute, Reverse, Accumulate, GridPropagate <br> **Non-linear:** Threshold, Saturate, Normalize, PullBack, LogCompress, CrossCorrelate, Convolve <br> **Neuromorphic:** Synaptic, Kuramoto, Hebbian, Ising, AsymmetricCouple <br> **Encoding:** EncodePhase, EncodeAmplitude |
+| **PhasorCircuit API** | Fluent, Qiskit-style circuit construction with full introspection and state visualization. |
+| **AnalyticEngine** | High-performance PyTorch simulator with full autograd support for variational optimization. |
+| **Experimental ML** | **VPC** (Classifier), **PhasorTransformer** (Sequence Prediction), and **PhasorGAN** (Generative Modeling). |
+| **Neuromorphic** | LIP integration layers and associative oscillator memory modules. |
+| **Visualization** | Native support for text-based and Matplotlib-based circuit diagrams. |
 
 ---
 
-## Installation
+## 🛠 Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/mindverse-computing/phasorflow.git
+git clone [https://github.com/mindverse-computing/phasorflow.git](https://github.com/mindverse-computing/phasorflow.git)
 cd phasorflow
 
 # Create virtual environment
@@ -33,11 +37,12 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
+
 ```
 
 ---
 
-## Quick Start
+## ⚡ Quick Start
 
 ```python
 import math
@@ -55,13 +60,16 @@ result = engine.run(pc)
 
 print(f"State: {result['state_vector']}")
 print(f"Phases: {result['phases']}")
+
 ```
 
 ---
 
-## Models
+## 🧠 Model Zoo
 
 ### VPC — Variational Phasor Circuit Classifier
+
+The VPC architecture maps input features to phases and optimizes circuit parameters for classification tasks.
 
 ```python
 from PhasorFlow.models import VPC
@@ -69,11 +77,12 @@ from PhasorFlow.models import VPC
 model = VPC(num_features=12, num_layers=2)
 model.fit(X_train, y_train, epochs=50, lr=0.1)
 accuracy = model.score(X_test, y_test)
+
 ```
 
-Supports binary & multi-class classification, single & multi-stack architectures with pullback/threshold inter-stack operations.
-
 ### PhasorTransformer — FNet-Style Sequence Prediction
+
+Utilizes Discrete Fourier Transform (DFT) gates to perform mixing, offering a phasor-based alternative to traditional attention.
 
 ```python
 from PhasorFlow.models import PhasorTransformer
@@ -81,75 +90,62 @@ from PhasorFlow.models import PhasorTransformer
 model = PhasorTransformer(seq_length=10, num_blocks=2)
 model.fit(X_train, y_train, epochs=30, lr=0.05)
 future = model.predict_autoregressive(context, horizon=20)
+
 ```
-
-Supports single-circuit and stacked modes with optional readout smoothing layer.
-
-### PhasorGAN — Generative Adversarial Network
-
-```python
-from PhasorFlow.models import PhasorGAN
-
-gan = PhasorGAN(seq_length=8, num_layers_g=2, num_layers_d=2)
-history = gan.fit(X_real, epochs=60, batch_size=10)
-fake_samples = gan.generate(num_samples=10)
-```
-
-Both Generator and Discriminator are phasor circuits trained adversarially.
 
 ---
 
-## Notebooks
+## 📓 Research Notebooks
 
-| # | Notebook | Description |
-|---|---|---|
-| 1 | `1-Circuits.ipynb` | Core circuit operations and gate catalog |
-| 2.1 | `2.1-Circuit-Operations.ipynb` | Advanced circuit composition |
+| Index | Notebook | Focus Area |
+| --- | --- | --- |
+| 1 | `1-Circuits.ipynb` | Core operations & gate catalog |
 | 2.2 | `2.2-Shor's-Algorithm.ipynb` | Period finding via phasor circuits |
-| 2.3 | `2.3-Neural-Binding.ipynb` | Phase synchronization for binding |
 | 2.4 | `2.4-Associative-Memory.ipynb` | Oscillator-based associative memory |
-| 2.5 | `2.5-Finance-Volatility-Phasor.ipynb` | Financial volatility modeling |
-| 3.1 | `3.1-VPC-Single.ipynb` | VPC first principles — single stack |
-| 3.2 | `3.2-VPC-Stacking-Regular.ipynb` | Multi-stack VPC |
-| 3.3 | `3.3-VPC-Stacking-PullBack.ipynb` | VPC with pullback inter-stack |
-| 3.4 | `3.4-VPC-Stacking-NonLinear.ipynb` | VPC with threshold gate |
-| 3.5 | `3.5-BCI-BrainFlow-Binary.ipynb` | BCI binary classification |
-| 3.6 | `3.6-BCI-BrainFlow-MultiClass.ipynb` | BCI multi-class classification |
-| 3.7 | `3.7-VPC-Direct.ipynb` | VPC model class API demo |
-| 4.1 | `4.1-Phasor-Transformer-Regular.ipynb` | FNet transformer first principles |
-| 4.2 | `4.2-Phasor-Transformer-NonLinear.ipynb` | Transformer with threshold gate |
-| 4.3 | `4.3-Transformer-Benchmarking.ipynb` | Phasor vs PyTorch transformer |
-| 4.4 | `4.4-LPM.ipynb` | Large Phasor Model (autoregressive) |
-| 4.5 | `4.5-Transformer-Direct.ipynb` | PhasorTransformer model API demo |
-| 5.1 | `5.1-Phasor-GAN.ipynb` | PhasorGAN model API demo |
-| 5.2 | `5.2-Phasor-GAN-First-Principle.ipynb` | GAN from raw PhasorCircuit |
+| 3.1 | `3.1-VPC-Single.ipynb` | VPC first principles |
+| 4.4 | `4.4-LPM.ipynb` | Large Phasor Model (Autoregressive) |
+| 5.1 | `5.1-Phasor-GAN.ipynb` | Generative Adversarial Networks |
+
+*For a full list of all 20+ documentation notebooks, see the [notebooks/](https://www.google.com/search?q=notebooks/) directory.*
 
 ---
 
-## How to Cite
+## 📑 How to Cite
 
-If you use **PhasorFlow** in your research, please cite our manuscript:
+If you use **PhasorFlow** in your research, please cite the software and the corresponding manuscript:
 
 ### BibTeX
 
 ```bibtex
-@article{sigdel2026phasorflow,
-  title={PhasorFlow: A Unitary Computing Framework for Resonant Algorithmic Acceleration},
-  author={Sigdel, Dibakar},
-  journal={arXiv preprint},
-  year={2026},
-  url={https://github.com/mindverse-computing/phasorflow}
+@software{sigdel_2026_phasorflow,
+  author       = {Sigdel, Dibakar and Panday, Namuna},
+  title        = {PhasorFlow: A Python Library for Unit Circle Based Computing},
+  month        = mar,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {v1.0.0},
+  doi          = {10.5281/zenodo.19044565},
+  url          = {[https://doi.org/10.5281/zenodo.19044565](https://doi.org/10.5281/zenodo.19044565)}
 }
+
 ```
 
 ### APA
 
-Sigdel, D. (2026). *PhasorFlow: A Unitary Computing Framework for Resonant Algorithmic Acceleration*. Mindverse Computing LLC. Retrieved from [https://github.com/mindverse-computing/phasorflow](https://github.com/mindverse-computing/phasorflow)
+Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* (Version v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
 
 ---
 
-## License
+## ⚖️ License
 
 **Copyright (c) 2024-2026 Mindverse Computing LLC**
 
-PhasorFlow is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license. This license pertains strictly to the copyright of the source code and associated documentation. **No patent rights are granted, implied, or transferred herein.** See the [LICENSE](LICENSE) file for full details.
+PhasorFlow is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
+
+* **Attribution:** You must give appropriate credit and provide a link to the license.
+* **Non-Commercial:** You may not use the material for commercial purposes.
+* **No Patent Rights:** This license pertains strictly to copyright. No patent rights are granted, implied, or transferred.
+
+---
+
+**Contact:** [Mindverse Computing](https://www.google.com/search?q=https://github.com/mindverse-computing)
