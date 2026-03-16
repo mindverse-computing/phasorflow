@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Neuromorphic Operations - PhasorFlow</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Neuromorphic Operations";
+        var mkdocs_page_input_path = "neuromorphic.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PhasorFlow
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Welcome</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../gates/">Gates & Matrices</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../traditional_dsa/">Traditional DSA</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Neuromorphic Operations</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#oscillatory-associative-memory-hopfield-modeling">Oscillatory Associative Memory (Hopfield Modeling)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#topology-bounding">Topology Bounding</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#continuous-fault-tolerance-denoising">Continuous Fault Tolerance &amp; Denoising</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#leaky-integrate-and-phase-lip-neural-binding">Leaky-Integrate-and-Phase (LIP) / Neural Binding</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#phase-synchronization-the-kuramoto-model">Phase Synchronization (The Kuramoto Model)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../machine_learning/">Variational Phasor Circuits (VPC)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../transformer/">Phasor Transformers</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PhasorFlow</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Neuromorphic Operations</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!--
+(c) 2026 Mindverse Computing LLC.
+Licensed under CC BY-NC 4.0.
+See LICENSE file for patent and commercial restrictions.
+-->
+
+<h1 id="neuromorphic-capabilities">Neuromorphic Capabilities</h1>
+<p>Because PhasorFlow rigorously constrains computational features onto the physical oscillatory manifolds defined strictly between <span class="arithmatex">\(2\pi\)</span> radians, it naturally bridges seamlessly with <strong>Neuromorphic Scientific Computing</strong>—scaling and mapping biological rhythms identical to the brain dynamically.</p>
+<hr />
+<h2 id="oscillatory-associative-memory-hopfield-modeling">Oscillatory Associative Memory (Hopfield Modeling)</h2>
+<p><em>Reproduce natively in: <code>examples/ex_05_associative_memory.py</code></em></p>
+<p><img alt="Associative Memory Evaluation" src="../assets/associative_memory_multi_panel.png" /></p>
+<p>The <code>PhasorFlowMemory</code> sub-module models organic cognitive memory by instantiating networks of bounded mathematical oscillators. You initialize sequence patterns, and the rigid structural grid physically binds them into geometrical holographic "Attractors."</p>
+<h3 id="topology-bounding">Topology Bounding</h3>
+<p>Given an underlying geometric matrix of <span class="arithmatex">\(N\)</span> oscillators, we store a set of <span class="arithmatex">\(P\)</span> phase patterns <span class="arithmatex">\(\boldsymbol{z}^{(p)} = e^{i \boldsymbol{\theta}^{(p)}}\)</span> via Hebbian learning:</p>
+<div class="arithmatex">\[
+W = \frac{1}{P} \sum_{p=1}^{P} \boldsymbol{z}^{(p)} \left(\boldsymbol{z}^{(p)}\right)^\dagger, \quad W_{kk} = 0
+\]</div>
+<p>This rigidly locks arrays of continuous vectors combining their absolute mathematical phase conjugates.</p>
+<h3 id="continuous-fault-tolerance-denoising">Continuous Fault Tolerance &amp; Denoising</h3>
+<p>If we generate a random input state actively corrupted by <strong>20% phase structural noise</strong> from internal network routing and pass it chronologically into the memory circuit, the associative physics exert mathematical analog gravity. Pattern recovery proceeds via iterative phase-locking:</p>
+<div class="arithmatex">\[
+\boldsymbol{z}^{(t+1)} = \frac{\boldsymbol{z}^{(t)} + \delta t \cdot W \boldsymbol{z}^{(t)}}{|\boldsymbol{z}^{(t)} + \delta t \cdot W \boldsymbol{z}^{(t)}|}
+\]</div>
+<p>This continuously forces the system exactly toward the correct bound minimum (attractor), enabling robust fault-tolerant retrieval.</p>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">phasorflow.neuromorphic.associative_memory</span><span class="w"> </span><span class="kn">import</span> <span class="n">PhasorFlowMemory</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Network holding 10 continuous Phase mappings</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">mem</span> <span class="o">=</span> <span class="n">PhasorFlowMemory</span><span class="p">(</span><span class="n">num_threads</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">mem</span><span class="o">.</span><span class="n">store</span><span class="p">([</span><span class="n">target_memory_pattern</span><span class="p">])</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># After just a few geometric iterations, the state locks in identically (&lt; 0.05 rad error)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">recovered_state</span> <span class="o">=</span> <span class="n">mem</span><span class="o">.</span><span class="n">converge</span><span class="p">(</span><span class="n">noisy_input</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></code></pre></div>
+The exact mechanics of this holographic scaling actively permit massive storage counts while retaining pure deterministic signal processing for binary patch-denoising operations.</p>
+<hr />
+<h2 id="leaky-integrate-and-phase-lip-neural-binding">Leaky-Integrate-and-Phase (LIP) / Neural Binding</h2>
+<p><em>Reproduce natively in: <code>examples/ex_04_neural_binding.py</code></em></p>
+<p><img alt="Neural Binding Sync" src="../assets/neural_binding_multi_panel.png" /></p>
+<p>The canonical mechanism driving biological neural processing relies exclusively on spiking neurons. PhasorFlow maps continuous sequence physics natively utilizing <strong>Leaky-Integrate-and-Phase</strong> (LIP), simulating phase return gradients punctuated heavily by matrix <code>MIX</code> entanglements modeling exactly how physical firing vectors collapse their adjacent synaptic geometric grids.</p>
+<h3 id="phase-synchronization-the-kuramoto-model">Phase Synchronization (The Kuramoto Model)</h3>
+<p>We mathematically simulate global neural binding via synchronized oscillating networks identically to biological macro-coherence functions. The LIP continuous-time dynamical system is governed natively by the Kuramoto phase derivative:</p>
+<div class="arithmatex">\[
+\frac{d\theta_k}{dt} = -\gamma (\theta_k - \theta_{\text{rest}}) + \sum_{j=1}^{N} W_{kj} \sin(\theta_k - \theta_j) + I_k^{\text{ext}}
+\]</div>
+<p>where <span class="arithmatex">\(\gamma\)</span> is the leak rate, <span class="arithmatex">\(\theta_{\text{rest}}\)</span> is the resting phase, <span class="arithmatex">\(W_{kj}\)</span> are synaptic coupling weights, and <span class="arithmatex">\(I_k^{\text{ext}}\)</span> is external input.</p>
+<p>Providing a randomly distributed <span class="arithmatex">\(N=20\)</span> matrix, we can execute structural binding over standard discrete steps. Over chronological integration logic, phase-coupling physically bridges disparate rhythmic geometries automatically locking phase dynamics into macro-states <span class="arithmatex">\(\ge 0.95\)</span> continuous consensus—the exact physical behavior defining conscious cognitive binding mechanics natively inside Python matrices!</p>
+<hr />
+<p><strong>© 2026 Mindverse Computing LLC.</strong><br />
+Licensed under CC BY-NC 4.0.<br />
+See LICENSE file for patent and commercial restrictions.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../traditional_dsa/" class="btn btn-neutral float-left" title="Traditional DSA"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../machine_learning/" class="btn btn-neutral float-right" title="Variational Phasor Circuits (VPC)">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../traditional_dsa/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../machine_learning/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/mathjax.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

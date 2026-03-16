@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Variational Phasor Circuits (VPC) - PhasorFlow</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Variational Phasor Circuits (VPC)";
+        var mkdocs_page_input_path = "machine_learning.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PhasorFlow
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Welcome</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../gates/">Gates & Matrices</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../traditional_dsa/">Traditional DSA</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../neuromorphic/">Neuromorphic Operations</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Variational Phasor Circuits (VPC)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-feature-map-encoding">1. Feature Map Encoding</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-variational-training-layers">2. Variational Training Layers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hands-on-optimizations-scripts">Hands-On Optimizations (Scripts)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#vpc-single-classification-ex_07_vpc_singlepy">VPC Single Classification (ex_07_vpc_single.py)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#financial-volatility-coherence-mapping-ex_06_finance_volatilitypy">Financial Volatility Coherence Mapping (ex_06_finance_volatility.py)</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../transformer/">Phasor Transformers</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PhasorFlow</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Variational Phasor Circuits (VPC)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!--
+(c) 2026 Mindverse Computing LLC.
+Licensed under CC BY-NC 4.0.
+See LICENSE file for patent and commercial restrictions.
+-->
+
+<h1 id="machine-learning-vpc">Machine Learning (VPC)</h1>
+<p>PhasorFlow achieves mathematical optimizations functionally mirroring <strong>Quantum Machine Learning (QML)</strong> natively simulated identically without stochastic sampling using deterministic <strong>Variational Phasor Circuits (VPC)</strong>.</p>
+<p>By sequentially injecting parameterized unitary logic gates (<code>Shift</code>) overlapping unparameterized interference manifolds (<code>Mix</code>/<code>DFT</code>), we scale hyper-efficient continuous feature estimators!</p>
+<hr />
+<h2 id="1-feature-map-encoding">1. Feature Map Encoding</h2>
+<p>The absolute foundation of a classical Phasor Circuit requires actively writing external arrays (e.g. Finance Data, Sensors, Vectors) dynamically into the independent bounds defined by the numerical grid <span class="arithmatex">\(N\)</span>.</p>
+<p>PhasorFlow supports <strong>Analog Normalization Encoding</strong>; ensuring numbers correctly reside linearly alongside the internal geometry preventing numerical infinite boundary wraparound!
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Distributing a generic spatial feature map over the starting layout</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_features</span><span class="p">):</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">circuit</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">normalized_x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></code></pre></div></p>
+<hr />
+<h2 id="2-variational-training-layers">2. Variational Training Layers</h2>
+<p>Once the data populates the phase geometries uniformly linearly, the classification boundaries manifest via parameterized rotations (<span class="arithmatex">\(W_{n}\)</span>).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Parameterized Rotations (Varying ML Weights)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_threads</span><span class="p">):</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">circuit</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Geometric Sequence Entanglement (Topological Convolution)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_threads</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">circuit</span><span class="o">.</span><span class="n">mix</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Or use `circuit.dft()` globally</span>
+</span></code></pre></div>
+<hr />
+<h2 id="hands-on-optimizations-scripts">Hands-On Optimizations (Scripts)</h2>
+<h3 id="vpc-single-classification-ex_07_vpc_singlepy">VPC Single Classification (<code>ex_07_vpc_single.py</code>)</h3>
+<p><img alt="VPC Classification Results" src="../assets/vpc_single_multi_panel.png" /></p>
+<p>As completely verified in the PhasorFlow manuscript, executing the <code>VPC</code> natively models geometric logic mapping flawlessly. We mathematically initialize an extreme scale minimum: <strong><span class="arithmatex">\(N=16\)</span> Nodes</strong> controlling strictly <strong>16 internal Parameter Variables</strong>.</p>
+<p>By evaluating deterministic <code>Adam</code> cross-entropy gradient convergence (<span class="arithmatex">\(lr=0.1\)</span>) against explicit labeled coordinates, the circuit geometrically scales a <span class="arithmatex">\(100\%\)</span> validation accuracy on binary separating hyper-spheres mathematically. A similarly mapped unconstrained multi-layer classical perceptron necessitates <span class="arithmatex">\(&gt;1,000\)</span> internal explicit linear logic variables to emulate this physical capability!</p>
+<h3 id="financial-volatility-coherence-mapping-ex_06_finance_volatilitypy">Financial Volatility Coherence Mapping (<code>ex_06_finance_volatility.py</code>)</h3>
+<p><img alt="Financial Volatility Coherence" src="../assets/finance_volatility_multi_panel.png" /></p>
+<p>Alternatively, we execute <strong>Unsupervised Phasor Evaluation</strong>—bypassing variable optimization parameters entirely to rely universally on native matrix coupling structures.</p>
+<p>By feeding normalized continuous stock geometry (OHLCV) directly structurally into the uncalibrated Phase arrays, the internal mathematical coherence <span class="arithmatex">\(C(t)\)</span> natively isolates noise. During heavily simulated market crises (days 80-120), chaotic temporal pricing forces the unit circle physical alignments to dramatically shear, generating a dynamic indicator crash to <span class="arithmatex">\(\sim 0.5\)</span> physically isolating macroeconomic variances deterministically outperforming complex manual signal tracking techniques!</p>
+<hr />
+<p><strong>© 2026 Mindverse Computing LLC.</strong><br />
+Licensed under CC BY-NC 4.0.<br />
+See LICENSE file for patent and commercial restrictions.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../neuromorphic/" class="btn btn-neutral float-left" title="Neuromorphic Operations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../transformer/" class="btn btn-neutral float-right" title="Phasor Transformers">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../neuromorphic/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../transformer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/mathjax.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

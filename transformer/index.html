@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Phasor Transformers - PhasorFlow</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Phasor Transformers";
+        var mkdocs_page_input_path = "transformer.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> PhasorFlow
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Welcome</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../gates/">Gates & Matrices</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../traditional_dsa/">Traditional DSA</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../neuromorphic/">Neuromorphic Operations</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../machine_learning/">Variational Phasor Circuits (VPC)</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Phasor Transformers</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-the-fnet-block-replacement">1. The FNet Block Replacement</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-implementation-benchmark">2. Implementation Benchmark</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-ground-truth-results">3. Ground Truth Results</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">PhasorFlow</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Phasor Transformers</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <!--
+(c) 2026 Mindverse Computing LLC.
+Licensed under CC BY-NC 4.0.
+See LICENSE file for patent and commercial restrictions.
+-->
+
+<h1 id="phasor-transformers-fnet">Phasor Transformers (FNet)</h1>
+<p>Modern Artificial Intelligence sequential generation operates fundamentally through the <strong>Transformer</strong> Attention architecture: dynamically scaling embedding Queries, Keys, and Values (<span class="arithmatex">\(Q K^T V\)</span>) to computationally evaluate scalar correlations between <span class="arithmatex">\(T\)</span> context tokens.</p>
+<p>PhasorFlow formally proves mathematically that this enormously expensive hidden mapping metric can be replaced inherently inside a deterministic interference space utilizing no learnable weights for the token-mixing action. The result is the <strong>Phasor Transformer</strong>.</p>
+<hr />
+<h2 id="1-the-fnet-block-replacement">1. The FNet Block Replacement</h2>
+<p>Google Research demonstrated (via <em>FNet</em>) that the core spatial capabilities of Deep Attention mechanics can be substituted extremely effectively via an unparameterized fast <em>Discrete Fourier Transform</em>.</p>
+<p>In Euclidean Transformer architectures, injecting heavy Fourier linear algebra layers across long sequences introduces numerical gridlocks. </p>
+<p>In <strong>PhasorFlow</strong>, evaluating the global DFT merely invokes the unparameterized rigid projection matrix <span class="arithmatex">\(e^{-i 2\pi k n / N}\)</span>! Therefore, by confining the sequence inputs securely to Unit Circle dimensions (<span class="arithmatex">\(|x|=1.0\)</span>), sequence processing shrinks to a tiny fraction of its scale.</p>
+<hr />
+<h2 id="2-implementation-benchmark">2. Implementation Benchmark</h2>
+<p>As definitively validated in the manuscript and reproducible instantly via <code>examples/ex_08_phasor_transformer.py</code>:</p>
+<p>We train a Phasor Transformer on predicting overlapping multi-frequency autoregressive time series curves comprised of additive Gaussian limits using a sliding window <span class="arithmatex">\(T=10\)</span> sequence.</p>
+<ol>
+<li><strong>PhasorCircuit Initialization</strong>: We mathematically allocate an <span class="arithmatex">\(N=10\)</span> node topology matching the temporal sequence boundary <span class="arithmatex">\(T\)</span>.</li>
+<li><strong>Phase Normalization</strong>: Instead of dense feature extraction, the actual signal amplitude sequence strictly normalizes bounds into <span class="arithmatex">\([-\pi, \pi]\)</span> rotations preventing infinite wraparound discontinuities.</li>
+<li><strong>Phasor Transformer (Self-Attention Wrapper)</strong>: </li>
+<li><strong>Pre-MLP (Feed-Forward)</strong>: We iterate raw trainable parameters onto every sequential position via <code>circuit.shift()</code>.</li>
+<li><strong>Token Token Mixing</strong>: We execute <code>.dft()</code> spreading each temporal index perfectly across the harmonic domain, creating <span class="arithmatex">\(T\)</span>-dimensional correlations natively <span class="arithmatex">\(O(T \log T)\)</span>.</li>
+<li><strong>Post-MLP (Feed-Forward)</strong>: We symmetrically unroll parameters closing the block.</li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Simplified Core FNet Block </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">circuit</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Pre-FFN Projection</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">circuit</span><span class="o">.</span><span class="n">dft</span><span class="p">()</span>                     <span class="c1"># Global Deterministic Sequence Token Mixing</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">circuit</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">T</span><span class="p">])</span> <span class="c1"># Post-FFN Decoder</span>
+</span></code></pre></div>
+<hr />
+<h2 id="3-ground-truth-results">3. Ground Truth Results</h2>
+<p><img alt="Phasor Transformer Benchmarks" src="../assets/phasor_transformer_multi_panel.png" /></p>
+<p>When rigorously trained utilizing L-BFGS-B optimization against identical sequential inputs for <span class="arithmatex">\(T=10\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th>Model Type</th>
+<th>Number of Params</th>
+<th>Theoretical Temporal Mixing</th>
+<th>Test Accuracy (MSE)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dense Scaled Dot-Product Attn</td>
+<td><span class="arithmatex">\(&gt;1,000\)</span></td>
+<td><span class="arithmatex">\(O(T^2)\)</span></td>
+<td><span class="arithmatex">\(\sim 0.003\)</span></td>
+</tr>
+<tr>
+<td><strong>Phasor Transformer (DFT)</strong></td>
+<td><strong>50</strong> (<span class="arithmatex">\(5 \times T\)</span>)</td>
+<td><strong><span class="arithmatex">\(O(T \log T)\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\sim 0.07\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p>While the standard self-attention wrapper contains infinite expansion layers to interpolate trivial regressions, the Phasor Transformer cleanly matches output distributions generating almost identical predictive capacities executing just <strong>50 total mathematical rotations</strong> globally.</p>
+<hr />
+<p><strong>© 2026 Mindverse Computing LLC.</strong><br />
+Licensed under CC BY-NC 4.0.<br />
+See LICENSE file for patent and commercial restrictions.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../machine_learning/" class="btn btn-neutral float-left" title="Variational Phasor Circuits (VPC)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../machine_learning/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../javascripts/mathjax.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
