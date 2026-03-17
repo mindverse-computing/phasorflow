@@ -1,0 +1,9 @@
+# Core runtime dependencies for PhasorFlow
+numpy>=1.24
+matplotlib>=3.7
+torch>=2.2
+
+# Optional example dependency (Shor's algorithm demo)
+
+qiskit>=1.0
+qiskit-aer>=0.14
