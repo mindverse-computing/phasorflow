@@ -10,9 +10,6 @@
 
 **Current version:** `0.2.0`
 
-> **Academic & Research Notice:** PhasorFlow is released under the **CC BY-NC 4.0** license. Commercial use is strictly prohibited. See the [LICENSE](LICENSE) file for details regarding patent and trademark reservations.
-
----
 
 ## 🚀 Key Features and Gate Capabilities
 
@@ -134,50 +131,7 @@ If you use **PhasorFlow** in your research, please cite the software and the cor
 
 Manuscript (arXiv): [PhasorFlow: A Python Library for Unit Circle Based Computing](https://arxiv.org/abs/2603.15886)
 
-### BibTeX (Manuscript)
-
-```bibtex
-@article{sigdel2026phasorflow,
-  title         = {PhasorFlow: A Python Library for Unit Circle Based Computing},
-  author        = {Sigdel, Dibakar and Panday, Namuna},
-  journal       = {arXiv preprint arXiv:2603.15886},
-  year          = {2026},
-  url           = {https://arxiv.org/abs/2603.15886}
-}
-```
-
-### BibTeX (Software)
-
-```bibtex
-@software{sigdel_2026_phasorflow,
-  author       = {Sigdel, Dibakar and Panday, Namuna},
-  title        = {PhasorFlow: A Python Library for Unit Circle Based Computing},
-  month        = mar,
-  year         = 2026,
-  publisher    = {Zenodo},
-  version      = {v0.2.0},
-  doi          = {10.5281/zenodo.19044565},
-  url          = {[https://doi.org/10.5281/zenodo.19044565](https://doi.org/10.5281/zenodo.19044565)}
-}
-
-```
 
 ### APA
 
 Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* (Version v0.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
-
----
-
-## ⚖️ License
-
-**Copyright (c) 2024-2026 Mindverse Computing LLC**
-
-PhasorFlow is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
-
-* **Attribution:** You must give appropriate credit and provide a link to the license.
-* **Non-Commercial:** You may not use the material for commercial purposes.
-* **No Patent Rights:** This license pertains strictly to copyright. No patent rights are granted, implied, or transferred.
-
----
-
-**Contact:** [Mindverse Computing](https://www.google.com/search?q=https://github.com/mindverse-computing)
