@@ -2,10 +2,13 @@
 # PhasorFlow 🌀
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19044565.svg)](https://doi.org/10.5281/zenodo.19044565)
+[![arXiv](https://img.shields.io/badge/arXiv-2603.15886-b31b1b.svg)](https://arxiv.org/abs/2603.15886)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![Framework: PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c.svg)](https://pytorch.org/)
 
 **PhasorFlow** is a high-performance Python library for **Unit Circle (Phasor) based Computing**. Built on PyTorch, it provides a complete framework for building, training, and deploying machine learning models that operate entirely on the unit circle through continuous phase interference.
+
+**Current version:** `0.2.0`
 
 > **Academic & Research Notice:** PhasorFlow is released under the **CC BY-NC 4.0** license. Commercial use is strictly prohibited. See the [LICENSE](LICENSE) file for details regarding patent and trademark reservations.
 
@@ -49,6 +52,29 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -e .
+```
+
+---
+
+## 🔖 Versioning and Release Updates
+
+PhasorFlow follows semantic versioning: `MAJOR.MINOR.PATCH`.
+
+- Increment `PATCH` for bug fixes (e.g., `0.2.0` -> `0.2.1`).
+- Increment `MINOR` for backward-compatible new features (e.g., `0.2.0` -> `0.3.0`).
+- Increment `MAJOR` for breaking API changes (e.g., `0.2.0` -> `1.0.0`).
+
+To publish a new version consistently:
+
+1. Update `__version__` in `__init__.py`.
+2. Update version mentions in this `README.md` (Current version + citation section).
+3. Commit and tag the release:
+
+```bash
+git add __init__.py README.md
+git commit -m "release: vX.Y.Z"
+git tag vX.Y.Z
+git push origin main --tags
 ```
 
 ---
@@ -106,7 +132,21 @@ PhasorFlow ships with rigorous mathematically validated `Jupyter` notebooks prov
 
 If you use **PhasorFlow** in your research, please cite the software and the corresponding manuscript:
 
-### BibTeX
+Manuscript (arXiv): [PhasorFlow: A Python Library for Unit Circle Based Computing](https://arxiv.org/abs/2603.15886)
+
+### BibTeX (Manuscript)
+
+```bibtex
+@article{sigdel2026phasorflow,
+  title         = {PhasorFlow: A Python Library for Unit Circle Based Computing},
+  author        = {Sigdel, Dibakar and Panday, Namuna},
+  journal       = {arXiv preprint arXiv:2603.15886},
+  year          = {2026},
+  url           = {https://arxiv.org/abs/2603.15886}
+}
+```
+
+### BibTeX (Software)
 
 ```bibtex
 @software{sigdel_2026_phasorflow,
@@ -115,7 +155,7 @@ If you use **PhasorFlow** in your research, please cite the software and the cor
   month        = mar,
   year         = 2026,
   publisher    = {Zenodo},
-  version      = {v1.0.0},
+  version      = {v0.2.0},
   doi          = {10.5281/zenodo.19044565},
   url          = {[https://doi.org/10.5281/zenodo.19044565](https://doi.org/10.5281/zenodo.19044565)}
 }
@@ -124,7 +164,7 @@ If you use **PhasorFlow** in your research, please cite the software and the cor
 
 ### APA
 
-Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* (Version v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
+Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* (Version v0.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
 
 ---
 
