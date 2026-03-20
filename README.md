@@ -97,33 +97,6 @@ print(f"Output Angles (rad): {result['phases']}")
 
 ---
 
-## 🧠 Model Zoo Capabilities
-
-### VPC — Variational Phasor Circuit Classifier
-The VPC architecture statically maps feature vectors into physical initial conditions and dynamically optimizes sequential `Shift` operators globally via gradient methods against categorical targets—evaluating complex separating structures with just dozens of weights instead of thousands.
-
-### PhasorTransformer — Continuous Sequence Architectures
-Extends Google's FNet theory by abandoning multi-head attention $Q K^T V$ weight projection entirely in favor of unparameterized sequence token mixing (`.dft()`) on the unit circle. Emulates classical autoregressive predictive transformers physically.
-
----
-
-## 📓 Research Notebooks & Validation
-
-PhasorFlow ships with rigorous mathematically validated `Jupyter` notebooks proving every theoretical capability spanning algorithm equivalents identically matching Qiskit to complete Hopfield Neural Denoising tasks.
-
-| Section | Notebook | Focus Area |
-| --- | --- | --- |
-| 1 | `1-Circuits.ipynb` | Base architecture & visualization validation |
-| 2.2 | `2.2-Shor's-Algorithm.ipynb` | Deterministic classical extraction of Shor's quantum period physics |
-| 2.3 | `2.3-Neural-Binding.ipynb` | Validation of LIP Layer and Kuramoto binding physics |
-| 2.4 | `2.4-Associative-Memory.ipynb` | Convergence properties of Holographic Multi-Pattern Phase Storage |
-| 2.5 | `2.5-Finance-Volatility-Phasor.ipynb` | Unsupervised OHLCV Phase Coherence charting anomaly detection |
-| 3.1 | `3.1-VPC-Single.ipynb` | Gradient evaluation limits of minimal continuous classification models |
-| 4.1 | `4.1-Phasor-Transformer.ipynb` | Regressive mapping of $T$-temporal continuous sinusoidal windows |
-
-*Pre-generated python execution configurations exist for all capabilities in `/phasorflow/examples/...`*
-
----
 
 ## 📑 How to Cite
 
