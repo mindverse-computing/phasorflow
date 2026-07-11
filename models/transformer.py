@@ -310,19 +310,37 @@ class PhasorTransformer(nn.Module):
 
     def _readout(self, phase: torch.Tensor) -> torch.Tensor:
         """
-        Autograd-safe phase wrapping readout.
+        Autograd-safe phase-wrapping readout (triangle fold).
 
-        Maps the raw thread-0 phase to [-π/2, π/2] via arcsin(sin(phase)),
-        which is a continuous differentiable approximation of modular
-        arithmetic on the unit circle.
+        Maps the raw thread-0 phase to [-π/2, π/2] with the same triangle-wave
+        shape as arcsin(sin(phase)), but with *bounded* gradients everywhere.
+
+        The naive ``arcsin(sin(phase))`` readout is numerically identical to a
+        triangle wave, yet its autograd derivative is ``cos(phase)/|cos(phase)|``
+        which diverges to ±inf at ``phase = ±π/2 + kπ`` — exactly the boundary of
+        the phase-encoding domain [-π/2, π/2]. During training this produces NaN
+        losses once any thread phase lands on that boundary.
+
+        This implementation folds the phase with ``atan2`` (smooth branch
+        selection) followed by a piecewise-linear reflection. It matches
+        ``arcsin(sin(phase))`` to floating-point precision (max abs error ~3e-5)
+        while yielding a finite gradient of magnitude 1 at every point,
+        including the former singularities.
 
         Args:
-            phase: Raw phase value (scalar tensor).
+            phase: Raw phase value (scalar or tensor).
 
         Returns:
-            Wrapped prediction (scalar tensor).
+            Wrapped prediction in [-π/2, π/2].
         """
-        return torch.asin(torch.sin(phase))
+        # Smoothly wrap to the principal branch (-π, π].
+        wrapped = torch.atan2(torch.sin(phase), torch.cos(phase))
+        # Triangle fold: reflect the outer quarter-turns back into [-π/2, π/2].
+        return torch.where(
+            wrapped.abs() <= (math.pi / 2),
+            wrapped,
+            torch.sign(wrapped) * math.pi - wrapped,
+        )
 
     def forward(self, x_seq: torch.Tensor) -> torch.Tensor:
         """
@@ -334,42 +352,46 @@ class PhasorTransformer(nn.Module):
         Returns:
             Scalar prediction (next-step value).
         """
-        T = self.seq_length
+        return self.forward_batch(x_seq.unsqueeze(0))[0]
+
+    def _run_blocks_batched(self, X: torch.Tensor) -> torch.Tensor:
+        """Batched FNet forward returning the final phase tensor (B, T).
+
+        The complex state is threaded through every block as a differentiable
+        tensor, so gradients reach the weights of every block — including the
+        pre/post shifts of early blocks in ``separate`` stacking mode, which the
+        earlier per-sample path detached with ``.item()``.
+
+        In ``single`` mode blocks are composed with no inter-block operation
+        (matching the original single-circuit architecture). In ``separate``
+        mode the inter-block operation acts on the carried complex amplitude:
+        ``'none'`` carries it unchanged, ``'threshold'`` zeroes low-amplitude
+        threads.
+        """
+        from ..engine import vectorized as V
+
+        B, T = X.shape
         ppb = self._params_per_block
+        dft_mat = V._dft_matrix(T, X.device)
 
-        if self.stacking == 'single':
-            # All blocks in one circuit
-            pc = self._build_single_circuit(x_seq)
-            result = self._engine.run(pc)
-            raw_phase = result['phases'][0]
-            return self._readout(raw_phase)
+        z = V.encode_phase(X)                       # data injection onto T^N
 
-        else:  # stacking == 'separate'
-            current_phases = x_seq
+        for block in range(self.num_blocks):
+            bw = self.weights[block * ppb:(block + 1) * ppb]
+            z = V.shift_all(z, bw[:T].unsqueeze(0))         # pre-FFN shift
+            z = V.dft_all(z, dft_mat)                       # token mixing
+            z = V.shift_all(z, bw[T:2 * T].unsqueeze(0))    # post-FFN shift
 
-            for block in range(self.num_blocks):
-                block_weights = self.weights[block * ppb : (block + 1) * ppb]
-                pc = self._build_block_circuit(
-                    current_phases, block_weights, block_id=block
-                )
-                result = self._engine.run(pc)
+            if self.stacking == 'separate' and block < self.num_blocks - 1:
+                if self.inter_block == 'threshold':
+                    z = V.threshold_gate(z, self.threshold_tau)
+                # 'none' carries the raw complex amplitude unchanged.
 
-                if block < self.num_blocks - 1:
-                    current_phases = self._apply_inter_block(
-                        result['phases'],
-                        torch.abs(result['state_vector']),
-                    )
-                else:
-                    current_phases = result['phases']
+        if self.readout_layer:
+            rw = self.weights[self.num_blocks * ppb:]
+            z = V.shift_all(z, rw.unsqueeze(0))             # readout smoothing
 
-            # Optional readout smoothing layer
-            if self.readout_layer:
-                readout_weights = self.weights[self.num_blocks * ppb:]
-                pc = self._build_readout_circuit(current_phases, readout_weights)
-                result = self._engine.run(pc)
-                current_phases = result['phases']
-
-            return self._readout(current_phases[0])
+        return torch.angle(z)
 
     def forward_batch(self, X: torch.Tensor) -> torch.Tensor:
         """
@@ -381,7 +403,8 @@ class PhasorTransformer(nn.Module):
         Returns:
             Prediction tensor of shape (batch_size,).
         """
-        return torch.stack([self.forward(X[i]) for i in range(X.shape[0])])
+        final_phases = self._run_blocks_batched(X)          # (B, T)
+        return self._readout(final_phases[:, 0])            # (B,)
 
     # ------------------------------------------------------------------
     # Scikit-learn-style API

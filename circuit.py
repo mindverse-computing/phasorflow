@@ -38,14 +38,25 @@ class PhasorCircuit:
     to an instruction list and executed lazily by the Simulator engine.
     """
 
-    def __init__(self, num_threads: int, name: str = "PhasorCircuit"):
+    def __init__(self, num_threads: int = None, name: str = "PhasorCircuit", *,
+                 n: int = None):
         """
         Initialize a phasor circuit.
 
         Args:
-            num_threads: Number of oscillator threads (wires).
-            name: Human-readable circuit name.
+            num_threads: Number of oscillator threads (wires).  May also be
+                         supplied as the keyword ``n`` for fluent-API brevity.
+            name:        Human-readable circuit name.
+            n:           Alias for ``num_threads`` (keyword-only).
         """
+        # Accept `n` as a keyword alias for `num_threads`
+        if n is not None and num_threads is None:
+            num_threads = n
+        if num_threads is None:
+            raise TypeError(
+                "PhasorCircuit() requires at least one positional argument: "
+                "'num_threads' (or keyword 'n')"
+            )
         self.num_threads = num_threads
         self.name = name
         self.data: List[Tuple[str, List[int], Dict[str, Any]]] = []
@@ -54,17 +65,41 @@ class PhasorCircuit:
     # Standard Unitary Gates
     # ------------------------------------------------------------------
 
-    def shift(self, thread_idx: int, phi: float) -> 'PhasorCircuit':
-        """Phase rotation gate: z_i → e^{jφ} · z_i."""
-        self._validate_thread(thread_idx)
-        self.data.append(('shift', [thread_idx], {'phi': phi}))
+    def shift(self, thread_idx_or_phi=None, phi: float = None) -> 'PhasorCircuit':
+        """Phase rotation gate: z_i → e^{jφ} · z_i.
+
+        Fluent (high-level) form:  .shift(phi)          – shifts ALL threads
+        Low-level form:            .shift(thread_idx, phi) – shifts one thread
+        """
+        if phi is None:
+            # Called as .shift(phi) — broadcast to all threads
+            broadcast_phi = float(thread_idx_or_phi)
+            for i in range(self.num_threads):
+                self.data.append(('shift', [i], {'phi': broadcast_phi}))
+        else:
+            # Called as .shift(thread_idx, phi)
+            thread_idx = int(thread_idx_or_phi)
+            self._validate_thread(thread_idx)
+            self.data.append(('shift', [thread_idx], {'phi': phi}))
         return self
 
-    def mix(self, thread_a: int, thread_b: int) -> 'PhasorCircuit':
-        """50/50 beam-splitter (interference junction) between two threads."""
-        self._validate_thread(thread_a)
-        self._validate_thread(thread_b)
-        self.data.append(('mix', [thread_a, thread_b], {}))
+    def mix(self, thread_a: int = None, thread_b: int = None) -> 'PhasorCircuit':
+        """50/50 beam-splitter (interference junction).
+
+        Fluent (high-level) form:  .mix()               – mixes ALL adjacent pairs
+        Low-level form:            .mix(thread_a, thread_b) – mixes two threads
+        """
+        if thread_a is None and thread_b is None:
+            # Global mix: apply beam-splitter to all adjacent pairs
+            for i in range(0, self.num_threads - 1, 2):
+                self.data.append(('mix', [i, i + 1], {}))
+            # Second pass for odd-starting pairs (butterfly pattern)
+            for i in range(1, self.num_threads - 1, 2):
+                self.data.append(('mix', [i, i + 1], {}))
+        else:
+            self._validate_thread(thread_a)
+            self._validate_thread(thread_b)
+            self.data.append(('mix', [thread_a, thread_b], {}))
         return self
 
     def dft(self, threads: Optional[List[int]] = None) -> 'PhasorCircuit':
@@ -195,11 +230,30 @@ class PhasorCircuit:
                          {'values': values, 'max_val': max_val}))
         return self
 
+    def encode_phase(self, values) -> 'PhasorCircuit':
+        """Fluent alias: encode a pre-computed phase tensor directly.
+
+        The values are treated as phase angles already in [−π, π];
+        no additional scaling is applied (max_val is set to 1 with the
+        assumption the caller passes normalised phases).
+
+        This is the recommended fluent-API entry point::
+
+            circuit = PhasorCircuit(n=8).encode_phase(phase_tensor).mix()
+        """
+        self.data.append(('encode_phases', list(range(self.num_threads)),
+                         {'values': values, 'max_val': 1.0}))
+        return self
+
     def encode_amplitudes(self, values) -> 'PhasorCircuit':
         """Encode classical values as amplitudes on threads."""
         self.data.append(('encode_amplitudes', list(range(self.num_threads)),
                          {'values': values}))
         return self
+
+    def encode_amplitude(self, values) -> 'PhasorCircuit':
+        """Fluent alias for encode_amplitudes()."""
+        return self.encode_amplitudes(values)
 
     # ------------------------------------------------------------------
     # Control Instructions

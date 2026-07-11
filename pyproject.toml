@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phasorflow"
+version = "0.3.0"
+description = "Unit-circle (phasor) computing framework with Variational Phasor Circuits and a DFT-based Phasor Transformer."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "CC BY-NC 4.0" }
+authors = [
+    { name = "Sigdel" },
+    { name = "Panday" },
+]
+dependencies = [
+    "torch>=2.0",
+    "numpy>=1.23",
+    "matplotlib>=3.5",
+]
+
+[project.optional-dependencies]
+benchmarks = ["scikit-learn>=1.2", "scipy>=1.9"]
+eeg = ["scikit-learn>=1.2", "scipy>=1.9", "mne>=1.5"]
+test = ["pytest>=7.0"]
+all = ["scikit-learn>=1.2", "scipy>=1.9", "mne>=1.5", "pytest>=7.0"]
+
+# This repository's root directory IS the `phasorflow` package: the package
+# modules live alongside this file rather than in a nested phasorflow/ folder.
+# We therefore map the top-level package name onto "." and enumerate every
+# sub-package explicitly (setuptools' auto-discovery cannot infer the prefix
+# for a "directory-is-the-package" layout).
+[tool.setuptools]
+package-dir = { "phasorflow" = "." }
+packages = [
+    "phasorflow",
+    "phasorflow.engine",
+    "phasorflow.gates",
+    "phasorflow.models",
+    "phasorflow.neuromorphic",
+    "phasorflow.visualization",
+    "phasorflow.data",
+    "phasorflow.benchmarks",
+]

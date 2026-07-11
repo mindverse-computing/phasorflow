@@ -1,9 +1,15 @@
-# Core runtime dependencies for PhasorFlow
-numpy>=1.24
-matplotlib>=3.7
-torch>=2.2
+# Core dependencies
+torch>=2.0
+numpy>=1.23
+matplotlib>=3.5
 
-# Optional example dependency (Shor's algorithm demo)
+# Benchmark / baseline dependencies (synthetic tasks + baselines)
+scikit-learn>=1.2
+scipy>=1.9
 
-qiskit>=1.0
-qiskit-aer>=0.14
+# Real-EEG benchmark (PhysioNet motor imagery). Optional but required to
+# reproduce the VPC manuscript's real-data results.
+mne>=1.5
+
+# Testing
+pytest>=7.0

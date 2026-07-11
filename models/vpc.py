@@ -243,34 +243,15 @@ class VPC(nn.Module):
 
         return pc
 
-    def _apply_inter_stack(
-        self,
-        phases: torch.Tensor,
-        amplitudes: torch.Tensor,
-    ) -> torch.Tensor:
-        """
-        Apply inter-stack operation to re-project phasors onto N-torus.
-
-        Args:
-            phases: Phase tensor from previous stack, shape (N,).
-            amplitudes: Amplitude tensor from previous stack, shape (N,).
-
-        Returns:
-            Phase tensor to feed into the next stack, shape (N,).
-        """
-        if self.inter_stack == 'none':
-            return phases
-
-        elif self.inter_stack == 'pullback':
-            return phases
-
-        elif self.inter_stack == 'threshold':
-            mask = (amplitudes >= self.threshold_tau).to(phases.dtype)
-            return phases * mask
-
-        else:
-            raise ValueError(f"Unknown inter_stack: '{self.inter_stack}'")
-
+    # NOTE: the legacy per-sample multi-stack path (_apply_inter_stack /
+    # _run_stacks) was removed in v0.3.0. It detached autograd at every stack
+    # boundary (phase-only re-encoding via _build_block) and its 'pullback'
+    # inter-stack mode was a no-op identical to 'none'. All training and
+    # inference now route through the batched, fully differentiable
+    # _run_stacks_batched (see below), where the three inter-stack modes
+    # (none / pullback / threshold) are genuinely distinct because the complex
+    # amplitude is carried between stacks. _build_block / _build_circuit are
+    # retained only for single-block circuit visualization and for PhasorGAN.
     def _build_circuit(self, x: torch.Tensor) -> PhasorCircuit:
         """
         Construct a single-stack VPC circuit (for introspection).
@@ -306,34 +287,6 @@ class VPC(nn.Module):
         e_x = torch.exp(logits - torch.max(logits))
         return e_x / e_x.sum(dim=0)
 
-    def _run_stacks(self, x: torch.Tensor) -> torch.Tensor:
-        """
-        Run through all stacks and return the final output phases.
-
-        Args:
-            x: Feature tensor of shape (num_features,).
-
-        Returns:
-            Phase tensor from the final stack.
-        """
-        pps = self.params_per_stack
-        current_phases = x
-
-        for stack in range(self.num_stacks):
-            stack_weights = self.weights[stack * pps : (stack + 1) * pps]
-            pc = self._build_block(current_phases, stack_weights, block_id=stack)
-            result = self._engine.run(pc)
-
-            if stack < self.num_stacks - 1:
-                current_phases = self._apply_inter_stack(
-                    result['phases'],
-                    torch.abs(result['state_vector']),
-                )
-            else:
-                current_phases = result['phases']
-
-        return current_phases
-
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Run the VPC on a single input sample.
@@ -345,12 +298,54 @@ class VPC(nn.Module):
             Binary mode: scalar probability in [0, 1].
             Multi-class mode: probability vector of shape (num_classes,).
         """
-        final_phases = self._run_stacks(x)
+        out = self.forward_batch(x.unsqueeze(0))
+        return out[0]
 
-        if self._is_binary:
-            return self._phase_to_prob_binary(final_phases[0])
-        else:
-            return self._phases_to_probs_multiclass(final_phases)
+    # ------------------------------------------------------------------
+    # Batched, fully-differentiable forward (vectorized engine)
+    # ------------------------------------------------------------------
+
+    def _run_stacks_batched(self, X: torch.Tensor) -> torch.Tensor:
+        """Run all stacks on a batch, returning the final phase tensor (B, N).
+
+        The *complex* state is threaded through every block as a differentiable
+        tensor, so gradients reach the weights of every stack (the earlier
+        per-sample path detached inter-stack phases with ``.item()``, which
+        zeroed the gradient of all but the last stack).
+
+        Between stacks the inter-stack operation acts on the carried complex
+        amplitude, making the three modes genuinely distinct:
+          * ``'none'``      — carry raw complex amplitude (drift into C^N),
+          * ``'pullback'``  — renormalise onto the torus T^N  (z → z/|z|),
+          * ``'threshold'`` — zero low-amplitude threads, then carry.
+        """
+        from ..engine import vectorized as V
+
+        B, N = X.shape
+        pps = self.params_per_stack
+        dft_mat = V._dft_matrix(N, X.device)
+
+        # Stack 0 encodes the data phases onto the torus.
+        z = V.encode_phase(X)
+
+        for stack in range(self.num_stacks):
+            sw = self.weights[stack * pps:(stack + 1) * pps]
+            for layer in range(self.num_layers):
+                theta = sw[layer * N:(layer + 1) * N]           # (N,)
+                z = V.shift_all(z, theta.unsqueeze(0))          # trainable shift
+                if self.coupling in ('mix_dft', 'mix_only'):
+                    z = V.mix_adjacent(z)
+                if self.coupling in ('mix_dft', 'dft_only'):
+                    z = V.dft_all(z, dft_mat)
+
+            if stack < self.num_stacks - 1:
+                if self.inter_stack == 'pullback':
+                    z = V.pullback(z)
+                elif self.inter_stack == 'threshold':
+                    z = V.threshold_gate(z, self.threshold_tau)
+                # 'none' carries the raw complex amplitude unchanged.
+
+        return torch.angle(z)
 
     def forward_batch(self, X: torch.Tensor) -> torch.Tensor:
         """
@@ -363,7 +358,13 @@ class VPC(nn.Module):
             Binary mode: probability tensor (batch_size,).
             Multi-class mode: probability tensor (batch_size, num_classes).
         """
-        return torch.stack([self.forward(X[i]) for i in range(X.shape[0])])
+        final_phases = self._run_stacks_batched(X)        # (B, N)
+
+        if self._is_binary:
+            return self._phase_to_prob_binary(final_phases[:, 0])   # (B,)
+        else:
+            logits = torch.sin(final_phases[:, :self.num_classes]) * self.logit_scale
+            return torch.softmax(logits, dim=1)                     # (B, K)
 
     # ------------------------------------------------------------------
     # Scikit-learn-style API
