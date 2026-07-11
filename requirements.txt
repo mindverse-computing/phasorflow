@@ -11,5 +11,11 @@ scipy>=1.9
 # reproduce the VPC manuscript's real-data results.
 mne>=1.5
 
+# Optional extras (install only if you run the corresponding material):
+#   pip install .[bci]        # brainflow  — live-BCI notebooks 3.5-3.7
+#   pip install .[qiskit]     # qiskit     — Shor comparison in ex_03
+#   pip install .[notebooks]  # jupyter/nbclient/ipykernel — run the notebooks
+#   pip install .[all]        # everything above
+
 # Testing
 pytest>=7.0

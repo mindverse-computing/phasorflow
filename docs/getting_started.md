@@ -70,10 +70,17 @@ backend = pf.Simulator.get_backend('analytic_simulator')
 # Simulates the linear algebra of the collective unitary matrices
 result = backend.run(circuit)
 
-# The resulting physical vector in the Complex Domain natively bounds at 1.0!
+# Read out the resulting complex state vector.
 print("Output Phase Angles (Radians):", np.angle(result['state_vector']))
-print("Output Amplitudes:", np.abs(result['state_vector'])) # Will always equal 1.0
+print("Output Amplitudes:", np.abs(result['state_vector']))
 ```
+
+Each thread starts on the unit circle ($|z|=1$). Pure per-thread rotations
+(`shift`) keep it there, but coupling gates such as `mix` and `dft` combine
+threads, so individual components drift into the complex plane
+($z \in \mathbb{C}$) while the **global** norm of the state is preserved. This
+controlled drift into $\mathbb{C}^N$ is exactly what gives phasor circuits their
+continuous geometric gradients.
 
 *(For more advanced dynamic non-linear functions like Logarithmic Compression, refer to `examples/ex_02_circuit_operations.py`!)*
 

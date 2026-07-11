@@ -22,8 +22,14 @@ dependencies = [
 [project.optional-dependencies]
 benchmarks = ["scikit-learn>=1.2", "scipy>=1.9"]
 eeg = ["scikit-learn>=1.2", "scipy>=1.9", "mne>=1.5"]
+# Live-BCI notebooks (notebooks/vpc_notebooks/3.5-3.7) stream from a BrainFlow board.
+bci = ["brainflow>=5.10", "scikit-learn>=1.2"]
+# Quantum cross-check in examples/ex_03_shors_algorithm.py (optional comparison only).
+qiskit = ["qiskit>=1.0"]
+# Executing the Jupyter notebooks under notebooks/.
+notebooks = ["jupyter", "nbclient>=0.9", "ipykernel"]
 test = ["pytest>=7.0"]
-all = ["scikit-learn>=1.2", "scipy>=1.9", "mne>=1.5", "pytest>=7.0"]
+all = ["scikit-learn>=1.2", "scipy>=1.9", "mne>=1.5", "brainflow>=5.10", "qiskit>=1.0", "jupyter", "nbclient>=0.9", "ipykernel", "pytest>=7.0"]
 
 # This repository's root directory IS the `phasorflow` package: the package
 # modules live alongside this file rather than in a nested phasorflow/ folder.

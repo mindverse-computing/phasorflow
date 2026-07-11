@@ -5,7 +5,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # PhasorFlow v0.2.0 — Complete Circuit Guide
+# # PhasorFlow v0.3.0 — Complete Circuit Guide
 # 
 # ## All 22 Gates · Circuit Diagrams · Statistics · Results
 # 
@@ -758,7 +758,7 @@ def main():
     # | 22 | `barrier()` | Control | — | Layer separator |
     # | 23 | `measure(label)` | Control | N | State snapshot |
     # 
-    # > **PhasorFlow v0.2.0** — 22 gates, professional PyTorch-based phasor computing framework for machine learning.
+    # > **PhasorFlow v0.3.0** — 22 gates, professional PyTorch-based phasor computing framework for machine learning.
 
 
 if __name__ == "__main__":

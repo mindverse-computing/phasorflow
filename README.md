@@ -84,21 +84,34 @@ Extends Google's FNet theory by abandoning multi-head attention $Q K^T V$ weight
 
 ---
 
-## 📓 Research Notebooks & Validation
+## 📓 Examples & Validation
 
-PhasorFlow ships with rigorous mathematically validated `Jupyter` notebooks proving every theoretical capability spanning algorithm equivalents identically matching Qiskit to complete Hopfield Neural Denoising tasks.
+PhasorFlow ships with ten runnable example scripts in `examples/` that exercise
+every capability — from base circuit construction to the DFT-based Phasor
+Transformer — plus a `pytest` suite in `tests/` covering gate unitarity, readout
+gradient finiteness, and reference/vectorized-engine equivalence.
 
-| Section | Notebook | Focus Area |
+| Example | Focus Area | Extra deps |
 | --- | --- | --- |
-| 1 | `1-Circuits.ipynb` | Base architecture & visualization validation |
-| 2.2 | `2.2-Shor's-Algorithm.ipynb` | Deterministic classical extraction of Shor's quantum period physics |
-| 2.3 | `2.3-Neural-Binding.ipynb` | Validation of LIP Layer and Kuramoto binding physics |
-| 2.4 | `2.4-Associative-Memory.ipynb` | Convergence properties of Holographic Multi-Pattern Phase Storage |
-| 2.5 | `2.5-Finance-Volatility-Phasor.ipynb` | Unsupervised OHLCV Phase Coherence charting anomaly detection |
-| 3.1 | `3.1-VPC-Single.ipynb` | Gradient evaluation limits of minimal continuous classification models |
-| 4.1 | `4.1-Phasor-Transformer.ipynb` | Regressive mapping of $T$-temporal continuous sinusoidal windows |
+| `ex_01_circuits.py` | Circuit construction, gates, and visualization | — |
+| `ex_02_circuit_operations.py` | Circuit operations and algorithmic (DSA) applications | — |
+| `ex_03_shors_algorithm.py` | Classical phasor extraction of Shor's period-finding physics | `qiskit` (`.[qiskit]`) |
+| `ex_04_neural_binding.py` | LIP-layer and Kuramoto phase-synchronization binding | — |
+| `ex_05_associative_memory.py` | Oscillatory (Hopfield-phase) associative memory | — |
+| `ex_06_finance_volatility.py` | OHLCV phase-coherence volatility detection | — |
+| `ex_07_vpc_single.py` | Single-block Variational Phasor Circuit classifier | — |
+| `ex_08_phasor_transformer.py` | FNet-style Phasor Transformer sequence model | — |
+| `ex_09_real_eeg_vpc.py` | Real PhysioNet EEG motor-imagery VPC benchmark | `mne`, `scikit-learn` (`.[eeg]`) |
+| `ex_10_depth_scaling.py` | VPC capacity ceiling and transformer depth scaling | `scikit-learn` (`.[benchmarks]`) |
 
-*Pre-generated python execution configurations exist for all capabilities in `/phasorflow/examples/...`*
+```bash
+# Run any example from the repository root
+python examples/ex_01_circuits.py
+
+# Run the test suite
+pip install -e .[test]
+pytest -q
+```
 
 ---
 
@@ -115,7 +128,7 @@ If you use **PhasorFlow** in your research, please cite the software and the cor
   month        = mar,
   year         = 2026,
   publisher    = {Zenodo},
-  version      = {v1.0.0},
+  version      = {v0.3.0},
   doi          = {10.5281/zenodo.19044565},
   url          = {[https://doi.org/10.5281/zenodo.19044565](https://doi.org/10.5281/zenodo.19044565)}
 }
@@ -124,7 +137,7 @@ If you use **PhasorFlow** in your research, please cite the software and the cor
 
 ### APA
 
-Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* (Version v1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
+Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* (Version v0.3.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
 
 ---
 
