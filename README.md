@@ -20,9 +20,9 @@ codebase.
 
 | Manuscript | Focus | Implementation |
 | --- | --- | --- |
-| **PhasorFlow: A Python Library for Unit Circle Based Computing** | The core framework — phasor circuits, the 22-gate library, and the analytic PyTorch backend | the library as a whole (`circuit.py`, `gates/`, `engine/`) |
-| **Variational Phasor Circuits for Phase-Native Brain–Computer Interface Classification** | The VPC classifier — trainable phase shifts + unitary mixing as a parameter-efficient alternative to dense nets, benchmarked on real motor-imagery EEG | `phasorflow.VPC` (`models/vpc.py`), `examples/ex_07_vpc_single.py`, `ex_09_real_eeg_vpc.py` |
-| **The Phasor Transformer: Resolving Attention Bottlenecks on the Unit Circle** | The Phasor Transformer block and the Large Phasor Model (LPM) — DFT token mixing at $\mathcal{O}(N\log N)$ in place of dot-product attention | `phasorflow.PhasorTransformer` (`models/transformer.py`), `examples/ex_08_phasor_transformer.py`, `ex_10_depth_scaling.py` |
+| [**PhasorFlow: A Python Library for Unit Circle Based Computing**](https://arxiv.org/abs/2603.15886) | The core framework — phasor circuits, the 22-gate library, and the analytic PyTorch backend | the library as a whole (`circuit.py`, `gates/`, `engine/`) |
+| [**Variational Phasor Circuits for Phase-Native Brain–Computer Interface Classification**](https://arxiv.org/abs/2603.18078) | The VPC classifier — trainable phase shifts + unitary mixing as a parameter-efficient alternative to dense nets, benchmarked on real motor-imagery EEG | `phasorflow.VPC` (`models/vpc.py`), `examples/ex_07_vpc_single.py`, `ex_09_real_eeg_vpc.py` |
+| [**The Phasor Transformer: Resolving Attention Bottlenecks on the Unit Circle**](https://arxiv.org/abs/2603.17433) | The Phasor Transformer block and the Large Phasor Model (LPM) — DFT token mixing at $\mathcal{O}(N\log N)$ in place of dot-product attention | `phasorflow.PhasorTransformer` (`models/transformer.py`), `examples/ex_08_phasor_transformer.py`, `ex_10_depth_scaling.py` |
 
 See [How to Cite](#-how-to-cite) for the BibTeX of each.
 
@@ -94,10 +94,10 @@ print(f"Output Angles (rad): {result['phases']}")
 ## 🧠 Model Zoo Capabilities
 
 ### VPC — Variational Phasor Circuit Classifier
-*Reference: the VPC manuscript.* The VPC architecture statically maps feature vectors into physical initial conditions and dynamically optimizes sequential `Shift` operators globally via gradient methods against categorical targets—evaluating complex separating structures with just dozens of weights instead of thousands. On real PhysioNet motor-imagery EEG it reaches a mean decoding accuracy of $\approx 0.60$—the best of the standard BCI baselines (LDA, logistic regression, RBF-SVM, MLP)—with an order of magnitude fewer parameters and the lowest cross-subject variance. Its capacity is characterized honestly: phase-only shifts with unitary mixing realize a linear decision function in a fixed cosine/sine lifting, well matched to separable band-power structure but unable to represent parity-type functions—a ceiling depth does not raise. Available as `phasorflow.VPC`.
+*Reference: the [VPC manuscript](https://arxiv.org/abs/2603.18078).* The VPC architecture statically maps feature vectors into physical initial conditions and dynamically optimizes sequential `Shift` operators globally via gradient methods against categorical targets—evaluating complex separating structures with just dozens of weights instead of thousands. On real PhysioNet motor-imagery EEG it reaches a mean decoding accuracy of $\approx 0.60$—the best of the standard BCI baselines (LDA, logistic regression, RBF-SVM, MLP)—with an order of magnitude fewer parameters and the lowest cross-subject variance. Its capacity is characterized honestly: phase-only shifts with unitary mixing realize a linear decision function in a fixed cosine/sine lifting, well matched to separable band-power structure but unable to represent parity-type functions—a ceiling depth does not raise. Available as `phasorflow.VPC`.
 
 ### PhasorTransformer / LPM — Continuous Sequence Architectures
-*Reference: the Phasor Transformer (LPM) manuscript.* Each Phasor Transformer block pairs lightweight trainable phase-shifts with a parameter-free Discrete Fourier Transform (`.dft()`) for token coupling, giving global $\mathcal{O}(N\log N)$ mixing without dot-product attention maps ($Q K^T V$)—extending Google's FNet in the unit-circle setting. Stacking these blocks defines the **Large Phasor Model (LPM)** for autoregressive sequence prediction: it beats a zero-parameter persistence baseline and, with the corrected gradient path, improves monotonically with depth before saturating, while remaining competitive-but-not-superior to self-attention at a fraction of the parameter count. Available as `phasorflow.PhasorTransformer`.
+*Reference: the [Phasor Transformer (LPM) manuscript](https://arxiv.org/abs/2603.17433).* Each Phasor Transformer block pairs lightweight trainable phase-shifts with a parameter-free Discrete Fourier Transform (`.dft()`) for token coupling, giving global $\mathcal{O}(N\log N)$ mixing without dot-product attention maps ($Q K^T V$)—extending Google's FNet in the unit-circle setting. Stacking these blocks defines the **Large Phasor Model (LPM)** for autoregressive sequence prediction: it beats a zero-parameter persistence baseline and, with the corrected gradient path, improves monotonically with depth before saturating, while remaining competitive-but-not-superior to self-attention at a fraction of the parameter count. Available as `phasorflow.PhasorTransformer`.
 
 ---
 
@@ -157,27 +157,40 @@ APA — Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit 
 ### Manuscripts
 
 The three companion manuscripts backed by this codebase (see
-[Reference Manuscripts](#-reference-manuscripts)):
+[Reference Manuscripts](#-reference-manuscripts)), all on arXiv:
 
 ```bibtex
-@article{sigdel_phasorflow_framework,
-  author  = {Sigdel, Dibakar and Panday, Namuna},
-  title   = {PhasorFlow: A Python Library for Unit Circle Based Computing},
-  year    = {2026}
+@misc{phasorflow2026,
+  title         = {PhasorFlow: A Python Library for Unit Circle Based Computing},
+  author        = {Sigdel, Dibakar and Panday, Namuna},
+  year          = {2026},
+  eprint        = {2603.15886},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  doi           = {10.48550/arXiv.2603.15886},
+  url           = {https://arxiv.org/abs/2603.15886}
 }
 
-@article{sigdel_vpc,
-  author  = {Sigdel, Dibakar},
-  title   = {Variational Phasor Circuits for Phase-Native
-             Brain--Computer Interface Classification},
-  year    = {2026}
+@misc{sigdel2026vpc,
+  title         = {Variational Phasor Circuits for Phase-Native
+                   Brain-Computer Interface Classification},
+  author        = {Sigdel, Dibakar},
+  year          = {2026},
+  eprint        = {2603.18078},
+  archivePrefix = {arXiv},
+  doi           = {10.48550/arXiv.2603.18078},
+  url           = {https://arxiv.org/abs/2603.18078}
 }
 
-@article{sigdel_lpm,
-  author  = {Sigdel, Dibakar},
-  title   = {The Phasor Transformer: Resolving Attention Bottlenecks
-             on the Unit Circle},
-  year    = {2026}
+@misc{sigdel2026lpm,
+  title         = {The Phasor Transformer: Resolving Attention Bottlenecks
+                   on the Unit Circle},
+  author        = {Sigdel, Dibakar},
+  year          = {2026},
+  eprint        = {2603.17433},
+  archivePrefix = {arXiv},
+  doi           = {10.48550/arXiv.2603.17433},
+  url           = {https://arxiv.org/abs/2603.17433}
 }
 ```
 
