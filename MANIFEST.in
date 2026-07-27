@@ -1,0 +1,19 @@
+# Include packaging + legal + docs-of-record
+include LICENSE
+include README.md
+include CHANGELOG.md
+include requirements.txt
+include CITATION.cff
+
+# Exclude heavy NON-PACKAGE trees from the sdist (kept in the source repo, not shipped).
+# NOTE: benchmarks/ and data/ are real importable sub-packages and are intentionally
+# NOT pruned.
+prune docs
+prune notebooks
+prune examples
+prune .vscode
+
+# Never ship caches / build cruft
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude .DS_Store

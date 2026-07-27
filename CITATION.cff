@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+message: "If you use PhasorFlow in your research, please cite both the software and the accompanying paper."
+title: "PhasorFlow: A Python Library for Unit Circle Based Computing"
+abstract: >-
+  PhasorFlow is a unit-circle (phasor) computing framework for Python. It
+  provides Variational Phasor Circuits, a DFT-based Phasor Transformer, a
+  library of phasor gates, and analytic and vectorized execution engines for
+  phase-native machine learning and signal processing.
+type: software
+authors:
+  - family-names: Sigdel
+    given-names: Dibakar
+  - family-names: Panday
+    given-names: Namuna
+version: 0.3.0
+date-released: "2026-03-16"
+license: MIT
+repository-code: "https://github.com/mindverse-computing/phasorflow"
+url: "https://github.com/mindverse-computing/phasorflow"
+doi: 10.5281/zenodo.19044564
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19044564
+    description: Concept DOI — resolves to the latest version of the software.
+  - type: doi
+    value: 10.5281/zenodo.19044565
+    description: Version DOI for v0.3.0.
+  - type: other
+    value: "arXiv:2603.15886"
+    description: Preprint describing the library.
+keywords:
+  - phasor
+  - variational phasor circuit
+  - phasor transformer
+  - unit-circle computing
+  - quantum-ready
+  - signal processing
+  - machine learning
+preferred-citation:
+  type: article
+  title: "PhasorFlow: A Python Library for Unit Circle Based Computing"
+  authors:
+    - family-names: Sigdel
+      given-names: Dibakar
+    - family-names: Panday
+      given-names: Namuna
+  year: 2026
+  month: 3
+  doi: 10.48550/arXiv.2603.15886
+  url: "https://arxiv.org/abs/2603.15886"
+  journal: "arXiv preprint"
+  notes: "arXiv:2603.15886"

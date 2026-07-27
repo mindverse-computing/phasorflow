@@ -8,10 +8,32 @@ version = "0.3.0"
 description = "Unit-circle (phasor) computing framework with Variational Phasor Circuits and a DFT-based Phasor Transformer."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "CC BY-NC 4.0" }
+license = { text = "MIT" }
 authors = [
-    { name = "Sigdel" },
-    { name = "Panday" },
+    { name = "Dibakar Sigdel" },
+    { name = "Namuna Panday" },
+]
+keywords = [
+    "phasor",
+    "variational phasor circuit",
+    "phasor transformer",
+    "unit-circle computing",
+    "quantum-ready",
+    "signal processing",
+    "machine learning",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 dependencies = [
     "torch>=2.0",
@@ -30,6 +52,15 @@ qiskit = ["qiskit>=1.0"]
 notebooks = ["jupyter", "nbclient>=0.9", "ipykernel"]
 test = ["pytest>=7.0"]
 all = ["scikit-learn>=1.2", "scipy>=1.9", "mne>=1.5", "brainflow>=5.10", "qiskit>=1.0", "jupyter", "nbclient>=0.9", "ipykernel", "pytest>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/mindverse-computing/phasorflow"
+Repository = "https://github.com/mindverse-computing/phasorflow"
+Documentation = "https://github.com/mindverse-computing/phasorflow#readme"
+Changelog = "https://github.com/mindverse-computing/phasorflow/blob/main/CHANGELOG.md"
+"Citation (Zenodo)" = "https://doi.org/10.5281/zenodo.19044564"
+"Paper (arXiv)" = "https://arxiv.org/abs/2603.15886"
+"Issue Tracker" = "https://github.com/mindverse-computing/phasorflow/issues"
 
 # This repository's root directory IS the `phasorflow` package: the package
 # modules live alongside this file rather than in a nested phasorflow/ folder.

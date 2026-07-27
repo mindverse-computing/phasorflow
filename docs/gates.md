@@ -1,6 +1,6 @@
 <!--
-(c) 2026 Mindverse Computing LLC.
-Licensed under CC BY-NC 4.0.
+(c) 2024-2026 Mindverse Computing LLC.
+Licensed under the MIT License.
 See LICENSE file for patent and commercial restrictions.
 -->
 
@@ -149,5 +149,5 @@ PhasorFlow ships with a comprehensive library of 22 primitive gates that organic
 ---
 
 **© 2026 Mindverse Computing LLC.**  
-Licensed under CC BY-NC 4.0.  
+Licensed under the MIT License.  
 See LICENSE file for patent and commercial restrictions.

@@ -13,8 +13,8 @@ Shor's algorithm is a famous quantum algorithm for integer factorization. The co
 ### PhasorFlow Implementation
 
 ```python
-# (c) 2026 Mindverse Computing LLC.
-# Licensed under CC BY-NC 4.0.
+# (c) 2024-2026 Mindverse Computing LLC.
+# Licensed under the MIT License.
 # See LICENSE file for patent and commercial restrictions.
 
 import math
@@ -68,8 +68,8 @@ Dynamic programming problems that rely on linear recurrences, like the Fibonacci
 ### PhasorFlow Implementation
 
 ```python
-# (c) 2026 Mindverse Computing LLC.
-# Licensed under CC BY-NC 4.0.
+# (c) 2024-2026 Mindverse Computing LLC.
+# Licensed under the MIT License.
 # See LICENSE file for patent and commercial restrictions.
 
 N = 10  # Compute first N Fibonacci numbers
@@ -102,8 +102,8 @@ By encoding a text string and a pattern as mathematical phases on the unit circl
 ### PhasorFlow Implementation
 
 ```python
-# (c) 2026 Mindverse Computing LLC.
-# Licensed under CC BY-NC 4.0.
+# (c) 2024-2026 Mindverse Computing LLC.
+# Licensed under the MIT License.
 # See LICENSE file for patent and commercial restrictions.
 
 from phasorflow.gates import EncodePhaseGate, CrossCorrelateGate
@@ -136,8 +136,8 @@ The Max-Cut problem (a classic NP-hard graph partitioning problem) can be heuris
 ### PhasorFlow Implementation
 
 ```python
-# (c) 2026 Mindverse Computing LLC.
-# Licensed under CC BY-NC 4.0.
+# (c) 2024-2026 Mindverse Computing LLC.
+# Licensed under the MIT License.
 # See LICENSE file for patent and commercial restrictions.
 
 from phasorflow.gates import IsingGate
@@ -167,5 +167,5 @@ print("Graph Partition:", partition)
 ```
 
 **© 2026 Mindverse Computing LLC.**  
-Licensed under CC BY-NC 4.0.  
+Licensed under the MIT License.  
 See LICENSE file for patent and commercial restrictions.

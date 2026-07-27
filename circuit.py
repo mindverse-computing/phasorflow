@@ -1,5 +1,5 @@
-# (c) 2026 Mindverse Computing LLC.
-# Licensed under CC BY-NC 4.0.
+# (c) 2024-2026 Mindverse Computing LLC.
+# Licensed under the MIT License.
 # See LICENSE file for patent and commercial restrictions.
 
 # phasorflow/circuit.py

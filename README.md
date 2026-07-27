@@ -1,13 +1,13 @@
 
 # PhasorFlow 🌀
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19044565.svg)](https://doi.org/10.5281/zenodo.19044565)
-[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19044564.svg)](https://doi.org/10.5281/zenodo.19044564)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Framework: PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c.svg)](https://pytorch.org/)
 
 **PhasorFlow** is a high-performance Python library for **Unit Circle (Phasor) based Computing**. Built on PyTorch, it provides a complete framework for building, training, and deploying machine learning models that operate entirely on the unit circle through continuous phase interference.
 
-> **Academic & Research Notice:** PhasorFlow is released under the **CC BY-NC 4.0** license. Commercial use is strictly prohibited. See the [LICENSE](LICENSE) file for details regarding patent and trademark reservations.
+> **Install:** `pip install phasorflow`. PhasorFlow is released under the permissive **MIT** license (see [LICENSE](LICENSE)).
 
 ---
 
@@ -139,6 +139,8 @@ a specific model, please also cite the corresponding manuscript.
 
 ### Software
 
+GitHub renders a **“Cite this repository”** button from [`CITATION.cff`](CITATION.cff).
+
 ```bibtex
 @software{sigdel_2026_phasorflow,
   author       = {Sigdel, Dibakar and Panday, Namuna},
@@ -147,12 +149,13 @@ a specific model, please also cite the corresponding manuscript.
   year         = 2026,
   publisher    = {Zenodo},
   version      = {v0.3.0},
-  doi          = {10.5281/zenodo.19044565},
-  url          = {https://doi.org/10.5281/zenodo.19044565}
+  doi          = {10.5281/zenodo.19044564},
+  url          = {https://doi.org/10.5281/zenodo.19044564},
+  note         = {Concept DOI (all versions). For v0.3.0 specifically, cite 10.5281/zenodo.19044565.}
 }
 ```
 
-APA — Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* (Version v0.3.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
+APA — Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044564
 
 ### Manuscripts
 
@@ -200,11 +203,10 @@ The three companion manuscripts backed by this codebase (see
 
 **Copyright (c) 2024-2026 Mindverse Computing LLC**
 
-PhasorFlow is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**.
-
-* **Attribution:** You must give appropriate credit and provide a link to the license.
-* **Non-Commercial:** You may not use the material for commercial purposes.
-* **No Patent Rights:** This license pertains strictly to copyright. No patent rights are granted, implied, or transferred.
+PhasorFlow is licensed under the **MIT License** — a permissive open-source
+license that allows use, modification, and redistribution, including for
+commercial purposes, provided the copyright notice and permission notice are
+retained. See the [LICENSE](LICENSE) file for the full text.
 
 ---
 
