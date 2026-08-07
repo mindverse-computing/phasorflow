@@ -4,7 +4,7 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19044565.svg)](https://doi.org/10.5281/zenodo.19044565)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Framework: PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c.svg)](https://pytorch.org/)
-[![Stewarded by Mindverse Computing](https://img.shields.io/badge/stewarded%20by-Quantum%20Omics%20Foundation-8a90ff.svg)](https://github.com/quantum-omics-foundation)
+[![Stewarded by Mindverse Computing](https://img.shields.io/badge/stewarded%20by-Mindverse%20Computing-8a90ff.svg)](https://github.com/indverse-computing)
 
 
 **PhasorFlow** is a high-performance Python library for **Unit Circle (Phasor) based Computing**. Built on PyTorch, it provides a complete framework for building, training, and deploying machine learning models that operate entirely on the unit circle through continuous phase interference.
