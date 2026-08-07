@@ -155,7 +155,7 @@ GitHub renders a **“Cite this repository”** button from [`CITATION.cff`](CIT
 }
 ```
 
-APA — Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044564
+APA — Sigdel, D., & Panday, N. (2026). *PhasorFlow: A Python Library for Unit Circle Based Computing* [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.19044565
 
 ### Manuscripts
 
